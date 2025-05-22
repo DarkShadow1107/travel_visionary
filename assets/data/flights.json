@@ -1,0 +1,1406 @@
+[
+	{
+		"id": "F001",
+		"origin": "Paris",
+		"destination": "New York",
+		"carrier": "Air France",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "12:00",
+		"flightDuration": "07:00",
+		"classPrices": { "Economy": 499.0, "Business": 1200.0, "First Class": 2200.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Boeing 777-300ER",
+		"seatsAvailable": {
+			"Economy": 120,
+			"Business": 10,
+			"First Class": 4
+		}
+	},
+	{
+		"id": "F001A",
+		"origin": "Paris",
+		"destination": "New York",
+		"carrier": "Air France",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "12:00",
+		"flightDuration": "07:00",
+		"classPrices": { "Economy": 499.0, "Business": 1200.0, "First Class": 2200.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Boeing 777-300ER",
+		"seatsAvailable": {
+			"Economy": 100,
+			"Business": 8,
+			"First Class": 2
+		}
+	},
+	{
+		"id": "F001B",
+		"origin": "Paris",
+		"destination": "New York",
+		"carrier": "Air France",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "18:00",
+		"flightDuration": "08:00",
+		"classPrices": { "Economy": 520.0, "Business": 1300.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 777-300ER",
+		"seatsAvailable": {
+			"Economy": 80,
+			"Business": 5
+		}
+	},
+	{
+		"id": "F001C",
+		"origin": "Paris",
+		"destination": "New York",
+		"carrier": "Air France",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "12:00",
+		"flightDuration": "07:00",
+		"classPrices": { "Economy": 505.0, "Business": 1250.0, "First Class": 2100.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Boeing 777-300ER",
+		"seatsAvailable": {
+			"Economy": 110,
+			"Business": 7,
+			"First Class": 3
+		}
+	},
+	{
+		"id": "F002",
+		"origin": "London",
+		"destination": "Tokyo",
+		"carrier": "British Airways",
+		"recurrence": "mon,wed,fri",
+		"departure_time": "14:00",
+		"arrival_time": "08:00",
+		"flightDuration": "18:00",
+		"classPrices": { "Economy": 799.0, "Premium Economy": 1500.0, "Business": 2500.0 },
+		"supportedClasses": ["Economy", "Premium Economy", "Business"],
+		"aircraft": "Boeing 787-9 Dreamliner",
+		"seatsAvailable": {
+			"Economy": 150,
+			"Premium Economy": 20,
+			"Business": 8
+		}
+	},
+	{
+		"id": "F002A",
+		"origin": "London",
+		"destination": "Tokyo",
+		"carrier": "British Airways",
+		"recurrence": "mon,wed,fri",
+		"departure_time": "14:00",
+		"arrival_time": "08:00",
+		"flightDuration": "18:00",
+		"classPrices": { "Economy": 799.0, "Premium Economy": 1500.0, "Business": 2500.0 },
+		"supportedClasses": ["Economy", "Premium Economy", "Business"],
+		"aircraft": "Boeing 787-9 Dreamliner",
+		"seatsAvailable": {
+			"Economy": 140,
+			"Premium Economy": 18,
+			"Business": 6
+		}
+	},
+	{
+		"id": "F002B",
+		"origin": "London",
+		"destination": "Tokyo",
+		"carrier": "British Airways",
+		"recurrence": "mon,wed,fri",
+		"departure_time": "14:00",
+		"arrival_time": "08:00",
+		"flightDuration": "18:00",
+		"classPrices": { "Economy": 810.0, "Premium Economy": 1550.0, "Business": 2600.0 },
+		"supportedClasses": ["Economy", "Premium Economy", "Business"],
+		"aircraft": "Boeing 787-9 Dreamliner",
+		"seatsAvailable": {
+			"Economy": 130,
+			"Premium Economy": 15,
+			"Business": 5
+		}
+	},
+	{
+		"id": "F003",
+		"origin": "Sydney",
+		"destination": "Dubai",
+		"carrier": "Emirates",
+		"recurrence": "fri,sun",
+		"departure_time": "22:00",
+		"arrival_time": "05:00",
+		"flightDuration": "07:00",
+		"classPrices": { "Economy": 699.0, "Business": 1600.0, "First Class": 2800.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Airbus A380-800",
+		"seatsAvailable": {
+			"Economy": 300,
+			"Business": 50,
+			"First Class": 14
+		}
+	},
+	{
+		"id": "F003A",
+		"origin": "Sydney",
+		"destination": "Dubai",
+		"carrier": "Emirates",
+		"recurrence": "fri,sun",
+		"departure_time": "22:00",
+		"arrival_time": "05:00",
+		"flightDuration": "07:00",
+		"classPrices": { "Economy": 699.0, "Business": 1600.0, "First Class": 2800.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Airbus A380-800",
+		"seatsAvailable": {
+			"Economy": 290,
+			"Business": 48,
+			"First Class": 12
+		}
+	},
+	{
+		"id": "F003B",
+		"origin": "Sydney",
+		"destination": "Dubai",
+		"carrier": "Emirates",
+		"recurrence": "fri,sun",
+		"departure_time": "22:00",
+		"arrival_time": "05:00",
+		"flightDuration": "07:00",
+		"classPrices": { "Economy": 715.0, "Business": 1650.0, "First Class": 2900.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Airbus A380-800",
+		"seatsAvailable": {
+			"Economy": 280,
+			"Business": 45,
+			"First Class": 10
+		}
+	},
+	{
+		"id": "F004",
+		"origin": "Berlin",
+		"destination": "Rome",
+		"carrier": "Lufthansa",
+		"recurrence": "daily",
+		"departure_time": "07:30",
+		"arrival_time": "09:45",
+		"flightDuration": "02:15",
+		"classPrices": { "Economy": 210.0, "Business": 600.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 90,
+			"Business": 8
+		}
+	},
+	{
+		"id": "F004A",
+		"origin": "Berlin",
+		"destination": "Rome",
+		"carrier": "Lufthansa",
+		"recurrence": "daily",
+		"departure_time": "07:30",
+		"arrival_time": "09:45",
+		"flightDuration": "02:15",
+		"classPrices": { "Economy": 210.0, "Business": 600.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 170,
+			"Business": 18
+		}
+	},
+	{
+		"id": "F004B",
+		"origin": "Berlin",
+		"destination": "Rome",
+		"carrier": "Lufthansa",
+		"recurrence": "daily",
+		"departure_time": "07:30",
+		"arrival_time": "09:45",
+		"flightDuration": "02:15",
+		"classPrices": { "Economy": 215.0, "Business": 650.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160,
+			"Business": 16
+		}
+	},
+	{
+		"id": "F005",
+		"origin": "Madrid",
+		"destination": "London",
+		"carrier": "Iberia",
+		"recurrence": "mon,wed,fri",
+		"departure_time": "10:00",
+		"arrival_time": "12:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 180.0, "Business": 500.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A321",
+		"seatsAvailable": {
+			"Economy": 100,
+			"Business": 6
+		}
+	},
+	{
+		"id": "F006",
+		"origin": "Amsterdam",
+		"destination": "Bangkok",
+		"carrier": "KLM",
+		"recurrence": "tue,thu,sat",
+		"departure_time": "16:00",
+		"arrival_time": "08:00",
+		"flightDuration": "16:00",
+		"classPrices": { "Economy": 950.0, "Business": 1800.0, "First Class": 3200.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Boeing 777-200",
+		"seatsAvailable": {
+			"Economy": 120,
+			"Business": 10,
+			"First Class": 2
+		}
+	},
+	{
+		"id": "F007",
+		"origin": "Dubai",
+		"destination": "Sydney",
+		"carrier": "Emirates",
+		"recurrence": "fri,sun",
+		"departure_time": "23:00",
+		"arrival_time": "13:00",
+		"flightDuration": "14:00",
+		"classPrices": { "Economy": 1200.0, "Business": 2500.0, "First Class": 4500.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Airbus A380-800",
+		"seatsAvailable": {
+			"Economy": 200,
+			"Business": 20,
+			"First Class": 4
+		}
+	},
+	{
+		"id": "F008",
+		"origin": "Los Angeles",
+		"destination": "Tokyo",
+		"carrier": "ANA",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "16:00",
+		"flightDuration": "08:00",
+		"classPrices": { "Economy": 1100.0, "Premium Economy": 2000.0, "Business": 3500.0 },
+		"supportedClasses": ["Economy", "Premium Economy", "Business"],
+		"aircraft": "Boeing 787-9 Dreamliner",
+		"seatsAvailable": {
+			"Economy": 150,
+			"Premium Economy": 20,
+			"Business": 12
+		}
+	},
+	{
+		"id": "F009",
+		"origin": "Singapore",
+		"destination": "Bangkok",
+		"carrier": "Singapore Airlines",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "10:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 220.0, "Business": 600.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A350-900",
+		"seatsAvailable": {
+			"Economy": 180,
+			"Business": 15
+		}
+	},
+	{
+		"id": "F010",
+		"origin": "Cape Town",
+		"destination": "Johannesburg",
+		"carrier": "South African Airways",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "14:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 260.0, "Business": 700.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 140
+		}
+	},
+	{
+		"id": "F011",
+		"origin": "Moscow",
+		"destination": "Istanbul",
+		"carrier": "Turkish Airlines",
+		"recurrence": "daily",
+		"departure_time": "18:00",
+		"arrival_time": "21:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 330.0, "Business": 900.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": {
+			"Economy": 160,
+			"Business": 10
+		}
+	},
+	{
+		"id": "F012",
+		"origin": "Beijing",
+		"destination": "Shanghai",
+		"carrier": "China Eastern",
+		"recurrence": "daily",
+		"departure_time": "08:00",
+		"arrival_time": "10:30",
+		"flightDuration": "02:30",
+		"classPrices": { "Economy": 210.0, "Business": 600.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A330-300",
+		"seatsAvailable": {
+			"Economy": 180,
+			"Business": 12
+		}
+	},
+	{
+		"id": "F013",
+		"origin": "Seoul",
+		"destination": "Tokyo",
+		"carrier": "Korean Air",
+		"recurrence": "daily",
+		"departure_time": "11:00",
+		"arrival_time": "13:30",
+		"flightDuration": "02:30",
+		"classPrices": { "Economy": 340.0, "Business": 900.0, "First Class": 3200.0 },
+		"supportedClasses": ["Economy", "Business", "First Class"],
+		"aircraft": "Boeing 747-8",
+		"seatsAvailable": {
+			"Economy": 250,
+			"Business": 20,
+			"First Class": 8
+		}
+	},
+	{
+		"id": "F014",
+		"origin": "New York",
+		"destination": "Los Angeles",
+		"carrier": "United",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "18:00",
+		"flightDuration": "06:00",
+		"classPrices": { "Economy": 420.0, "Business": 1100.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 757-200",
+		"seatsAvailable": {
+			"Economy": 180,
+			"Business": 15
+		}
+	},
+	{
+		"id": "F015",
+		"origin": "London",
+		"destination": "Paris",
+		"carrier": "British Airways",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "11:15",
+		"flightDuration": "02:15",
+		"classPrices": { "Economy": 200.0, "Business": 550.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160,
+			"Business": 10
+		}
+	},
+	{
+		"id": "F016",
+		"origin": "Rome",
+		"destination": "Athens",
+		"carrier": "Aegean Airlines",
+		"recurrence": "daily",
+		"departure_time": "13:00",
+		"arrival_time": "15:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 170.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 150
+		}
+	},
+	{
+		"id": "F017",
+		"origin": "Frankfurt",
+		"destination": "Zurich",
+		"carrier": "Swiss",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "11:00",
+		"flightDuration": "01:00",
+		"classPrices": { "Economy": 150.0, "Business": 400.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A220",
+		"seatsAvailable": {
+			"Economy": 120,
+			"Business": 8
+		}
+	},
+	{
+		"id": "F018",
+		"origin": "Amsterdam",
+		"destination": "Brussels",
+		"carrier": "KLM",
+		"recurrence": "daily",
+		"departure_time": "08:30",
+		"arrival_time": "09:30",
+		"flightDuration": "01:00",
+		"classPrices": { "Economy": 130.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": {
+			"Economy": 100
+		}
+	},
+	{
+		"id": "F019",
+		"origin": "Oslo",
+		"destination": "Stockholm",
+		"carrier": "SAS",
+		"recurrence": "daily",
+		"departure_time": "14:00",
+		"arrival_time": "15:00",
+		"flightDuration": "01:00",
+		"classPrices": { "Economy": 140.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": {
+			"Economy": 120
+		}
+	},
+	{
+		"id": "F020",
+		"origin": "Helsinki",
+		"destination": "Copenhagen",
+		"carrier": "Finnair",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "13:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 160.0, "Business": 450.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A321",
+		"seatsAvailable": {
+			"Economy": 140,
+			"Business": 6
+		}
+	},
+	{
+		"id": "F021",
+		"origin": "Vienna",
+		"destination": "Prague",
+		"carrier": "Austrian",
+		"recurrence": "daily",
+		"departure_time": "17:00",
+		"arrival_time": "18:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 120.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Bombardier Q400",
+		"seatsAvailable": {
+			"Economy": 80
+		}
+	},
+	{
+		"id": "F022",
+		"origin": "Budapest",
+		"destination": "Warsaw",
+		"carrier": "LOT",
+		"recurrence": "daily",
+		"departure_time": "19:00",
+		"arrival_time": "20:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 110.0, "Business": 300.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Embraer E175",
+		"seatsAvailable": {
+			"Economy": 90,
+			"Business": 4
+		}
+	},
+	{
+		"id": "F023",
+		"origin": "Dublin",
+		"destination": "Edinburgh",
+		"carrier": "Aer Lingus",
+		"recurrence": "daily",
+		"departure_time": "07:00",
+		"arrival_time": "08:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 100.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": {
+			"Economy": 70
+		}
+	},
+	{
+		"id": "F024",
+		"origin": "Lisbon",
+		"destination": "Madrid",
+		"carrier": "TAP",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "11:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 115.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160
+		}
+	},
+	{
+		"id": "F025",
+		"origin": "Brussels",
+		"destination": "Paris",
+		"carrier": "Brussels Airlines",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "13:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 125.0, "Business": 350.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A319",
+		"seatsAvailable": {
+			"Economy": 140,
+			"Business": 6
+		}
+	},
+	{
+		"id": "F026",
+		"origin": "Zurich",
+		"destination": "Vienna",
+		"carrier": "Swiss",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "16:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 135.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A220",
+		"seatsAvailable": {
+			"Economy": 120
+		}
+	},
+	{
+		"id": "F027",
+		"origin": "Prague",
+		"destination": "Budapest",
+		"carrier": "Czech Airlines",
+		"recurrence": "daily",
+		"departure_time": "18:00",
+		"arrival_time": "19:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 145.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": {
+			"Economy": 80
+		}
+	},
+	{
+		"id": "F028",
+		"origin": "Warsaw",
+		"destination": "Dublin",
+		"carrier": "LOT",
+		"recurrence": "daily",
+		"departure_time": "20:00",
+		"arrival_time": "22:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 155.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": {
+			"Economy": 90
+		}
+	},
+	{
+		"id": "F029",
+		"origin": "Edinburgh",
+		"destination": "Lisbon",
+		"carrier": "Ryanair",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "12:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 165.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": {
+			"Economy": 100
+		}
+	},
+	{
+		"id": "F030",
+		"origin": "Madrid",
+		"destination": "Berlin",
+		"carrier": "Iberia",
+		"recurrence": "daily",
+		"departure_time": "13:00",
+		"arrival_time": "16:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 175.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 150
+		}
+	},
+	{
+		"id": "F031",
+		"origin": "Rome",
+		"destination": "London",
+		"carrier": "Alitalia",
+		"recurrence": "daily",
+		"departure_time": "17:00",
+		"arrival_time": "19:30",
+		"flightDuration": "02:30",
+		"classPrices": { "Economy": 185.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160
+		}
+	},
+	{
+		"id": "F032",
+		"origin": "Paris",
+		"destination": "Amsterdam",
+		"carrier": "Air France",
+		"recurrence": "daily",
+		"departure_time": "08:00",
+		"arrival_time": "09:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 195.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": {
+			"Economy": 100
+		}
+	},
+	{
+		"id": "F033",
+		"origin": "Berlin",
+		"destination": "Frankfurt",
+		"carrier": "Lufthansa",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "11:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 205.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160
+		}
+	},
+	{
+		"id": "F034",
+		"origin": "London",
+		"destination": "Zurich",
+		"carrier": "British Airways",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "14:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 215.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 150
+		}
+	},
+	{
+		"id": "F035",
+		"origin": "Amsterdam",
+		"destination": "Oslo",
+		"carrier": "KLM",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "17:30",
+		"flightDuration": "02:30",
+		"classPrices": { "Economy": 225.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": {
+			"Economy": 120
+		}
+	},
+	{
+		"id": "F036",
+		"origin": "Stockholm",
+		"destination": "Helsinki",
+		"carrier": "SAS",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "10:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 235.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": {
+			"Economy": 120
+		}
+	},
+	{
+		"id": "F037",
+		"origin": "Copenhagen",
+		"destination": "Vienna",
+		"carrier": "SAS",
+		"recurrence": "daily",
+		"departure_time": "11:00",
+		"arrival_time": "13:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 245.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 140
+		}
+	},
+	{
+		"id": "F038",
+		"origin": "Prague",
+		"destination": "Berlin",
+		"carrier": "Czech Airlines",
+		"recurrence": "daily",
+		"departure_time": "14:00",
+		"arrival_time": "15:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 255.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": {
+			"Economy": 80
+		}
+	},
+	{
+		"id": "F039",
+		"origin": "Budapest",
+		"destination": "Rome",
+		"carrier": "Wizz Air",
+		"recurrence": "daily",
+		"departure_time": "16:00",
+		"arrival_time": "18:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 265.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 150
+		}
+	},
+	{
+		"id": "F040",
+		"origin": "Warsaw",
+		"destination": "London",
+		"carrier": "LOT",
+		"recurrence": "daily",
+		"departure_time": "18:00",
+		"arrival_time": "20:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 275.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": {
+			"Economy": 90
+		}
+	},
+	{
+		"id": "F041",
+		"origin": "Dublin",
+		"destination": "Paris",
+		"carrier": "Aer Lingus",
+		"recurrence": "daily",
+		"departure_time": "20:00",
+		"arrival_time": "22:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 285.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": {
+			"Economy": 70
+		}
+	},
+	{
+		"id": "F042",
+		"origin": "Lisbon",
+		"destination": "Berlin",
+		"carrier": "TAP",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "12:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 295.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160
+		}
+	},
+	{
+		"id": "F043",
+		"origin": "Brussels",
+		"destination": "Madrid",
+		"carrier": "Brussels Airlines",
+		"recurrence": "daily",
+		"departure_time": "13:00",
+		"arrival_time": "16:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 305.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A319",
+		"seatsAvailable": {
+			"Economy": 140
+		}
+	},
+	{
+		"id": "F044",
+		"origin": "Zurich",
+		"destination": "London",
+		"carrier": "Swiss",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "17:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 315.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A220",
+		"seatsAvailable": {
+			"Economy": 120
+		}
+	},
+	{
+		"id": "F045",
+		"origin": "Vienna",
+		"destination": "Amsterdam",
+		"carrier": "Austrian",
+		"recurrence": "daily",
+		"departure_time": "17:00",
+		"arrival_time": "19:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 325.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Bombardier Q400",
+		"seatsAvailable": {
+			"Economy": 80
+		}
+	},
+	{
+		"id": "F046",
+		"origin": "Prague",
+		"destination": "Paris",
+		"carrier": "Czech Airlines",
+		"recurrence": "daily",
+		"departure_time": "19:00",
+		"arrival_time": "21:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 335.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": {
+			"Economy": 70
+		}
+	},
+	{
+		"id": "F047",
+		"origin": "Budapest",
+		"destination": "London",
+		"carrier": "Wizz Air",
+		"recurrence": "daily",
+		"departure_time": "21:00",
+		"arrival_time": "23:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 345.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 150
+		}
+	},
+	{
+		"id": "F048",
+		"origin": "Warsaw",
+		"destination": "Rome",
+		"carrier": "LOT",
+		"recurrence": "daily",
+		"departure_time": "08:00",
+		"arrival_time": "10:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 355.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": {
+			"Economy": 90
+		}
+	},
+	{
+		"id": "F049",
+		"origin": "Dublin",
+		"destination": "Berlin",
+		"carrier": "Aer Lingus",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "12:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 365.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": {
+			"Economy": 70
+		}
+	},
+	{
+		"id": "F050",
+		"origin": "Lisbon",
+		"destination": "Paris",
+		"carrier": "TAP",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "14:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 375.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": {
+			"Economy": 160
+		}
+	},
+	{
+		"id": "F051",
+		"origin": "Toronto",
+		"destination": "Vancouver",
+		"carrier": "Air Canada",
+		"recurrence": "daily",
+		"departure_time": "08:00",
+		"arrival_time": "10:00",
+		"flightDuration": "05:00",
+		"classPrices": { "Economy": 420.0, "Business": 1100.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 787-9 Dreamliner",
+		"seatsAvailable": { "Economy": 180, "Business": 20 }
+	},
+	{
+		"id": "F052",
+		"origin": "New Delhi",
+		"destination": "Mumbai",
+		"carrier": "Air India",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "11:15",
+		"flightDuration": "02:15",
+		"classPrices": { "Economy": 150.0, "Business": 400.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 160, "Business": 10 }
+	},
+	{
+		"id": "F053",
+		"origin": "Bangkok",
+		"destination": "Singapore",
+		"carrier": "Thai Airways",
+		"recurrence": "daily",
+		"departure_time": "13:00",
+		"arrival_time": "16:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 210.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 777-200",
+		"seatsAvailable": { "Economy": 200 }
+	},
+	{
+		"id": "F054",
+		"origin": "Cape Town",
+		"destination": "Johannesburg",
+		"carrier": "South African Airways",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "17:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 180.0, "Business": 500.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A330-200",
+		"seatsAvailable": { "Economy": 150, "Business": 12 }
+	},
+	{
+		"id": "F055",
+		"origin": "Dubai",
+		"destination": "Cairo",
+		"carrier": "Emirates",
+		"recurrence": "mon,wed,fri",
+		"departure_time": "10:00",
+		"arrival_time": "12:30",
+		"flightDuration": "02:30",
+		"classPrices": { "Economy": 320.0, "Business": 900.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 777-300ER",
+		"seatsAvailable": { "Economy": 180, "Business": 20 }
+	},
+	{
+		"id": "F056",
+		"origin": "Los Angeles",
+		"destination": "San Francisco",
+		"carrier": "Delta",
+		"recurrence": "daily",
+		"departure_time": "07:00",
+		"arrival_time": "08:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 120.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-900",
+		"seatsAvailable": { "Economy": 160 }
+	},
+	{
+		"id": "F057",
+		"origin": "Sydney",
+		"destination": "Melbourne",
+		"carrier": "Qantas",
+		"recurrence": "daily",
+		"departure_time": "11:00",
+		"arrival_time": "12:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 140.0, "Business": 350.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": { "Economy": 170, "Business": 8 }
+	},
+	{
+		"id": "F058",
+		"origin": "Auckland",
+		"destination": "Wellington",
+		"carrier": "Air New Zealand",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "10:00",
+		"flightDuration": "01:00",
+		"classPrices": { "Economy": 110.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 150 }
+	},
+	{
+		"id": "F059",
+		"origin": "Hong Kong",
+		"destination": "Taipei",
+		"carrier": "Cathay Pacific",
+		"recurrence": "daily",
+		"departure_time": "14:00",
+		"arrival_time": "16:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 210.0, "Business": 600.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A350-900",
+		"seatsAvailable": { "Economy": 180, "Business": 15 }
+	},
+	{
+		"id": "F060",
+		"origin": "Doha",
+		"destination": "Istanbul",
+		"carrier": "Qatar Airways",
+		"recurrence": "daily",
+		"departure_time": "16:00",
+		"arrival_time": "20:00",
+		"flightDuration": "04:00",
+		"classPrices": { "Economy": 330.0, "Business": 900.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Boeing 787-8 Dreamliner",
+		"seatsAvailable": { "Economy": 200, "Business": 20 }
+	},
+	{
+		"id": "F061",
+		"origin": "Madrid",
+		"destination": "Barcelona",
+		"carrier": "Iberia",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "11:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 130.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 160 }
+	},
+	{
+		"id": "F062",
+		"origin": "Brussels",
+		"destination": "Vienna",
+		"carrier": "Brussels Airlines",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "13:45",
+		"flightDuration": "01:45",
+		"classPrices": { "Economy": 140.0, "Business": 350.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A319",
+		"seatsAvailable": { "Economy": 140, "Business": 6 }
+	},
+	{
+		"id": "F063",
+		"origin": "Zurich",
+		"destination": "Geneva",
+		"carrier": "Swiss",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "16:00",
+		"flightDuration": "01:00",
+		"classPrices": { "Economy": 120.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A220",
+		"seatsAvailable": { "Economy": 120 }
+	},
+	{
+		"id": "F064",
+		"origin": "Oslo",
+		"destination": "Copenhagen",
+		"carrier": "SAS",
+		"recurrence": "daily",
+		"departure_time": "18:00",
+		"arrival_time": "19:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 145.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": { "Economy": 120 }
+	},
+	{
+		"id": "F065",
+		"origin": "Stockholm",
+		"destination": "Gothenburg",
+		"carrier": "SAS",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "10:00",
+		"flightDuration": "01:00",
+		"classPrices": { "Economy": 110.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": { "Economy": 120 }
+	},
+	{
+		"id": "F066",
+		"origin": "Copenhagen",
+		"destination": "Helsinki",
+		"carrier": "Finnair",
+		"recurrence": "daily",
+		"departure_time": "11:00",
+		"arrival_time": "13:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 150.0, "Business": 400.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A321",
+		"seatsAvailable": { "Economy": 140, "Business": 6 }
+	},
+	{
+		"id": "F067",
+		"origin": "Vienna",
+		"destination": "Budapest",
+		"carrier": "Austrian",
+		"recurrence": "daily",
+		"departure_time": "17:00",
+		"arrival_time": "18:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 120.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Bombardier Q400",
+		"seatsAvailable": { "Economy": 80 }
+	},
+	{
+		"id": "F068",
+		"origin": "Budapest",
+		"destination": "Prague",
+		"carrier": "Wizz Air",
+		"recurrence": "daily",
+		"departure_time": "19:00",
+		"arrival_time": "20:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 110.0, "Business": 300.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 90, "Business": 4 }
+	},
+	{
+		"id": "F069",
+		"origin": "Dublin",
+		"destination": "Brussels",
+		"carrier": "Aer Lingus",
+		"recurrence": "daily",
+		"departure_time": "07:00",
+		"arrival_time": "08:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 100.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": { "Economy": 70 }
+	},
+	{
+		"id": "F070",
+		"origin": "Lisbon",
+		"destination": "Geneva",
+		"carrier": "TAP",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "11:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 115.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 160 }
+	},
+	{
+		"id": "F071",
+		"origin": "Brussels",
+		"destination": "Zurich",
+		"carrier": "Brussels Airlines",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "13:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 125.0, "Business": 350.0 },
+		"supportedClasses": ["Economy", "Business"],
+		"aircraft": "Airbus A319",
+		"seatsAvailable": { "Economy": 140, "Business": 6 }
+	},
+	{
+		"id": "F072",
+		"origin": "Zurich",
+		"destination": "Prague",
+		"carrier": "Swiss",
+		"recurrence": "daily",
+		"departure_time": "15:00",
+		"arrival_time": "16:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 135.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A220",
+		"seatsAvailable": { "Economy": 120 }
+	},
+	{
+		"id": "F073",
+		"origin": "Prague",
+		"destination": "Vienna",
+		"carrier": "Czech Airlines",
+		"recurrence": "daily",
+		"departure_time": "18:00",
+		"arrival_time": "19:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 145.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "ATR 72",
+		"seatsAvailable": { "Economy": 80 }
+	},
+	{
+		"id": "F074",
+		"origin": "Warsaw",
+		"destination": "Brussels",
+		"carrier": "LOT",
+		"recurrence": "daily",
+		"departure_time": "20:00",
+		"arrival_time": "22:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 155.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": { "Economy": 90 }
+	},
+	{
+		"id": "F075",
+		"origin": "Edinburgh",
+		"destination": "Madrid",
+		"carrier": "Ryanair",
+		"recurrence": "daily",
+		"departure_time": "09:00",
+		"arrival_time": "12:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 165.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Boeing 737-800",
+		"seatsAvailable": { "Economy": 100 }
+	},
+	{
+		"id": "F076",
+		"origin": "Madrid",
+		"destination": "Zurich",
+		"carrier": "Iberia",
+		"recurrence": "daily",
+		"departure_time": "13:00",
+		"arrival_time": "16:00",
+		"flightDuration": "03:00",
+		"classPrices": { "Economy": 175.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 150 }
+	},
+	{
+		"id": "F077",
+		"origin": "Rome",
+		"destination": "Berlin",
+		"carrier": "Alitalia",
+		"recurrence": "daily",
+		"departure_time": "17:00",
+		"arrival_time": "19:30",
+		"flightDuration": "02:30",
+		"classPrices": { "Economy": 185.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 160 }
+	},
+	{
+		"id": "F078",
+		"origin": "Paris",
+		"destination": "Geneva",
+		"carrier": "Air France",
+		"recurrence": "daily",
+		"departure_time": "08:00",
+		"arrival_time": "09:30",
+		"flightDuration": "01:30",
+		"classPrices": { "Economy": 195.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Embraer E190",
+		"seatsAvailable": { "Economy": 100 }
+	},
+	{
+		"id": "F079",
+		"origin": "Berlin",
+		"destination": "Vienna",
+		"carrier": "Lufthansa",
+		"recurrence": "daily",
+		"departure_time": "10:00",
+		"arrival_time": "11:15",
+		"flightDuration": "01:15",
+		"classPrices": { "Economy": 205.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 160 }
+	},
+	{
+		"id": "F080",
+		"origin": "London",
+		"destination": "Oslo",
+		"carrier": "British Airways",
+		"recurrence": "daily",
+		"departure_time": "12:00",
+		"arrival_time": "14:00",
+		"flightDuration": "02:00",
+		"classPrices": { "Economy": 215.0 },
+		"supportedClasses": ["Economy"],
+		"aircraft": "Airbus A320",
+		"seatsAvailable": { "Economy": 150 }
+	}
+]
