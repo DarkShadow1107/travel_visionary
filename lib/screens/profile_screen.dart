@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Added for state management
 import '../models/models.dart';
 import '../services/services.dart';
-import 'booking_history.dart'; // Import BookingHistoryScreen
+// Import BookingHistoryScreen
 
 // Enum to manage the state of the profile screen (logged out, logged in, creating account, editing account)
 enum ProfileState { loggedOut, loggedIn, creatingAccount, editingAccount }

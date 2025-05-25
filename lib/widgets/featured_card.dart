@@ -1,6 +1,6 @@
-import 'dart:ui'; // For ImageFilter
+// For ImageFilter
 import 'package:flutter/material.dart';
-import './full_screen_image_view.dart'; // Import the new widget
+import 'package:travel_visionary/widgets/full_screen_image_view.dart'; // Import the new widget
 
 class FeaturedCard extends StatefulWidget {
   // Changed to StatefulWidget
@@ -57,7 +57,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
               borderRadius: BorderRadius.circular(16),
               image: DecorationImage(
                 image: AssetImage(
-                  'assets/assets/home/${widget.destination}.jpg', // Use widget.destination
+                  'assets/home/${widget.destination}.jpg', // Use widget.destination
                 ), // Use destination name for image
                 fit: BoxFit.cover,
                 colorFilter: const ColorFilter.mode(

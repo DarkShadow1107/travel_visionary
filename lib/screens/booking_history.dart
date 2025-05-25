@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/models.dart';
 import '../services/services.dart';
-import 'profile_screen.dart'; // Import ProfileScreen
+// Import ProfileScreen
 
 class BookingHistoryScreen extends StatefulWidget {
   // If you want to pass the account, uncomment this and the constructor

@@ -897,10 +897,11 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                                               // then the addFlightBooking method in AccountService and the Flight booking map needs adjustment.
                                               // For now, assuming the service handles date logic based on the Flight object and internal logic.
                                             );
-                                            if (mounted)
+                                            if (mounted) {
                                               Navigator.pop(
                                                 context,
                                               ); // Close dialog
+                                            }
                                             ScaffoldMessenger.of(
                                               context,
                                             ).showSnackBar(
