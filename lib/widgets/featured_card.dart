@@ -57,7 +57,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
               borderRadius: BorderRadius.circular(16),
               image: DecorationImage(
                 image: AssetImage(
-                  'assets/home/${widget.destination}.jpg', // Use widget.destination
+                  'assets/assets/home/${widget.destination}.jpg', // Use widget.destination and corrected path
                 ), // Use destination name for image
                 fit: BoxFit.cover,
                 colorFilter: const ColorFilter.mode(

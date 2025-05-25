@@ -10,7 +10,7 @@ class FullScreenImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final imagePath = 'assets/home/$destination.jpg';
+    final imagePath = 'assets/assets/home/$destination.jpg';
 
     return GestureDetector(
       onTap: () {
