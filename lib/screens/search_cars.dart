@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Added provider
 import '../models/models.dart';
 import '../services/services.dart';
 
@@ -31,9 +32,9 @@ class _SearchCarsScreenState extends State<SearchCarsScreen> {
 
   // Options for filters - these would be populated from data or defined statically
   List<String> _carBrands = []; // e.g., ['Toyota', 'Honda', 'BMW']
-  List<String> _fuelTypes = ['Gasoline', 'Diesel', 'Electric', 'Hybrid'];
-  List<String> _transmissionTypes = ['Automatic', 'Manual'];
-  List<String> _carTypes = [
+  final List<String> _fuelTypes = ['Gasoline', 'Diesel', 'Electric', 'Hybrid'];
+  final List<String> _transmissionTypes = ['Automatic', 'Manual'];
+  final List<String> _carTypes = [
     'Sedan',
     'SUV',
     'Truck',
@@ -988,7 +989,7 @@ class _SearchCarsScreenState extends State<SearchCarsScreen> {
                                                 ),
                                               ),
                                               child: const Text('Book Now'),
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 if (_pickupDate == null ||
                                                     _dropoffDate == null) {
                                                   Navigator.of(
@@ -1007,7 +1008,7 @@ class _SearchCarsScreenState extends State<SearchCarsScreen> {
                                                   );
                                                   return;
                                                 }
-                                                // Corrected: Ensure rentalDays is positive for BookingService
+
                                                 final int currentRentalDays =
                                                     _dropoffDate!
                                                         .difference(
@@ -1034,11 +1035,43 @@ class _SearchCarsScreenState extends State<SearchCarsScreen> {
                                                   return;
                                                 }
 
-                                                BookingService().bookCar(
-                                                  car,
-                                                  _pickupDate!,
-                                                  _dropoffDate!,
-                                                );
+                                                final accountService =
+                                                    Provider.of<AccountService>(
+                                                      context,
+                                                      listen: false,
+                                                    );
+                                                // Use await to get the current account
+                                                final Account? account =
+                                                    await accountService
+                                                        .getCurrentAccount();
+
+                                                if (account == null) {
+                                                  Navigator.of(
+                                                    dialogContext,
+                                                  ).pop();
+                                                  ScaffoldMessenger.of(
+                                                    context,
+                                                  ).showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                        'You must be logged in to book a car.',
+                                                      ),
+                                                      backgroundColor:
+                                                          Colors.redAccent,
+                                                    ),
+                                                  );
+                                                  // Optionally, navigate to login screen
+                                                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen()));
+                                                  return;
+                                                }
+
+                                                await accountService
+                                                    .addCarBooking(
+                                                      // Added await here
+                                                      car,
+                                                      _pickupDate!,
+                                                      _dropoffDate!,
+                                                    );
                                                 Navigator.of(
                                                   dialogContext,
                                                 ).pop();

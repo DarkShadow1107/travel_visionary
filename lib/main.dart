@@ -7,9 +7,19 @@ import 'screens/search_cars.dart';
 import 'screens/profile_screen.dart';
 import 'screens/booking_history.dart';
 import 'dart:ui'; // Import for ImageFilter.blur
+import 'package:provider/provider.dart'; // Added for Provider
+import 'services/services.dart'; // Added for AccountService
 
 void main() {
-  runApp(const TravelVisionaryApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<AccountService>(create: (_) => AccountService()),
+        // You can add other providers here if needed
+      ],
+      child: const TravelVisionaryApp(),
+    ),
+  );
 }
 
 class TravelVisionaryApp extends StatelessWidget {
@@ -164,69 +174,75 @@ class _MainNavigationState extends State<MainNavigation>
               ), // Rotation transform
             ),
           ),
-          child: Scaffold(
-            backgroundColor:
-                Colors.transparent, // Make Scaffold background transparent
-            body:
-                _screens[_selectedIndex], // This should correctly display the selected screen
-            bottomNavigationBar: Container(
-              // Remove Padding, Center, and ConstrainedBox for full width
-              margin: const EdgeInsets.all(
-                16.0,
-              ), // Keep some margin for the floating effect
-              child: ClipRRect(
-                // ClipRRect for rounded corners on the blurred container
-                borderRadius: BorderRadius.circular(24.0), // Rounded corners
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(
-                        0.65,
-                      ), // Teal with opacity
-                      borderRadius: BorderRadius.circular(
-                        24.0,
-                      ), // Ensure container also has rounded corners
-                    ),
-                    child: NavigationBar(
-                      backgroundColor:
-                          Colors
-                              .transparent, // Make NavigationBar itself transparent
-                      indicatorColor: Theme.of(
-                        context,
-                      ).colorScheme.secondary.withOpacity(0.5),
-                      selectedIndex: _selectedIndex,
-                      onDestinationSelected: (int index) {
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
-                      destinations: const [
-                        NavigationDestination(
-                          icon: Icon(Icons.home),
-                          label: 'Home',
-                        ),
-                        NavigationDestination(
-                          icon: Icon(Icons.flight),
-                          label: 'Flights',
-                        ),
-                        NavigationDestination(
-                          icon: Icon(Icons.hotel),
-                          label: 'Hotels',
-                        ),
-                        NavigationDestination(
-                          icon: Icon(Icons.directions_car),
-                          label: 'Cars',
-                        ),
-                        NavigationDestination(
-                          icon: Icon(Icons.history),
-                          label: 'Bookings',
-                        ),
-                        NavigationDestination(
-                          icon: Icon(Icons.person),
-                          label: 'Profile',
-                        ),
-                      ],
+          child: BackdropFilter(
+            // Added BackdropFilter here
+            filter: ImageFilter.blur(
+              sigmaX: 16.0,
+              sigmaY: 16.0,
+            ), // Added blur effect
+            child: Scaffold(
+              backgroundColor:
+                  Colors.transparent, // Make Scaffold background transparent
+              body:
+                  _screens[_selectedIndex], // This should correctly display the selected screen
+              bottomNavigationBar: Container(
+                // Remove Padding, Center, and ConstrainedBox for full width
+                margin: const EdgeInsets.all(
+                  16.0,
+                ), // Keep some margin for the floating effect
+                child: ClipRRect(
+                  // ClipRRect for rounded corners on the blurred container
+                  borderRadius: BorderRadius.circular(24.0), // Rounded corners
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 32.0, sigmaY: 32.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary
+                            .withOpacity(0.75), // Teal with opacity
+                        borderRadius: BorderRadius.circular(
+                          24.0,
+                        ), // Ensure container also has rounded corners
+                      ),
+                      child: NavigationBar(
+                        backgroundColor:
+                            Colors
+                                .transparent, // Make NavigationBar itself transparent
+                        indicatorColor: Theme.of(
+                          context,
+                        ).colorScheme.secondary.withOpacity(0.5),
+                        selectedIndex: _selectedIndex,
+                        onDestinationSelected: (int index) {
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                        },
+                        destinations: const [
+                          NavigationDestination(
+                            icon: Icon(Icons.home),
+                            label: 'Home',
+                          ),
+                          NavigationDestination(
+                            icon: Icon(Icons.flight),
+                            label: 'Flights',
+                          ),
+                          NavigationDestination(
+                            icon: Icon(Icons.hotel),
+                            label: 'Hotels',
+                          ),
+                          NavigationDestination(
+                            icon: Icon(Icons.directions_car),
+                            label: 'Cars',
+                          ),
+                          NavigationDestination(
+                            icon: Icon(Icons.history),
+                            label: 'Bookings',
+                          ),
+                          NavigationDestination(
+                            icon: Icon(Icons.person),
+                            label: 'Profile',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

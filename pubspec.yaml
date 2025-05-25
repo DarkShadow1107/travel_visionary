@@ -30,6 +30,10 @@ environment:
 dependencies:
     flutter:
         sdk: flutter
+    flutter_svg: ^2.0.10+1 # Add this line
+    provider: ^6.0.0 # Add this line for state management
+    path_provider: ^2.0.0 # Add this line
+    crypto: ^3.0.0 # Add this line
 
     # The following adds the Cupertino Icons font to your application.
     # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +66,8 @@ flutter:
         - assets/data/hotels.json
         - assets/data/cars.json
         - assets/fonts/ # Ensure this line is present
+        - assets/assets/airlines/ # Added for airline logos
+        - assets/assets/home/ # Added for home screen images
 
     # To add assets to your application, add an assets section, like this:
     # assets:

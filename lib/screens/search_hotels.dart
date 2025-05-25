@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/models.dart';
-import '../services/services.dart';
+import '../services/services.dart'; // Corrected import path
 
 class SearchHotelsScreen extends StatefulWidget {
   const SearchHotelsScreen({super.key});
@@ -464,577 +465,625 @@ class _SearchHotelsScreenState extends State<SearchHotelsScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent, // Allow main gradient to show
       body: SafeArea(
-        child: Center(
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: 1240),
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Find Your Perfect Hotel',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '${_filteredHotels.length} results found',
-                  style: const TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-                const SizedBox(height: 24),
-                Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 310,
-                          child: TextFormField(
-                            controller: _cityController,
-                            decoration: const InputDecoration(
-                              labelText: 'City',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
+        child: SingleChildScrollView(
+          // Wrap Center with SingleChildScrollView
+          child: Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 1240),
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Find Your Perfect Hotel',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${_filteredHotels.length} results found',
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 24),
+                  Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 310,
+                            child: TextFormField(
+                              controller: _cityController,
+                              decoration: const InputDecoration(
+                                labelText: 'City',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
                               ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 200,
-                          child: GestureDetector(
-                            onTap:
-                                () => _showDatePickerSheet(isCheckOut: false),
-                            child: AbsorbPointer(
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: 'Check-in',
-                                  labelStyle: const TextStyle(
-                                    color: Color(0xFF77B0AA),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 200,
+                            child: GestureDetector(
+                              onTap:
+                                  () => _showDatePickerSheet(isCheckOut: false),
+                              child: AbsorbPointer(
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Check-in',
+                                    labelStyle: const TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    floatingLabelStyle: const TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF1B1A55),
+                                    hintText:
+                                        _checkIn == null
+                                            ? 'Select date'
+                                            : _checkIn!
+                                                .toLocal()
+                                                .toString()
+                                                .split(' ')[0],
                                   ),
-                                  floatingLabelStyle: const TextStyle(
-                                    color: Color(0xFF77B0AA),
+                                  controller: TextEditingController(
+                                    text:
+                                        _checkIn == null
+                                            ? ''
+                                            : _checkIn!
+                                                .toLocal()
+                                                .toString()
+                                                .split(' ')[0],
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF1B1A55),
-                                  hintText:
-                                      _checkIn == null
-                                          ? 'Select date'
-                                          : _checkIn!
-                                              .toLocal()
-                                              .toString()
-                                              .split(' ')[0],
+                                  readOnly: true,
                                 ),
-                                controller: TextEditingController(
-                                  text:
-                                      _checkIn == null
-                                          ? ''
-                                          : _checkIn!
-                                              .toLocal()
-                                              .toString()
-                                              .split(' ')[0],
-                                ),
-                                readOnly: true,
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 200,
-                          child: GestureDetector(
-                            onTap: () => _showDatePickerSheet(isCheckOut: true),
-                            child: AbsorbPointer(
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: 'Check-out',
-                                  labelStyle: const TextStyle(
-                                    color: Color(0xFF77B0AA),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 200,
+                            child: GestureDetector(
+                              onTap:
+                                  () => _showDatePickerSheet(isCheckOut: true),
+                              child: AbsorbPointer(
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Check-out',
+                                    labelStyle: const TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    floatingLabelStyle: const TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF1B1A55),
+                                    hintText:
+                                        _checkOut == null
+                                            ? 'Select date'
+                                            : _checkOut!
+                                                .toLocal()
+                                                .toString()
+                                                .split(' ')[0],
                                   ),
-                                  floatingLabelStyle: const TextStyle(
-                                    color: Color(0xFF77B0AA),
+                                  controller: TextEditingController(
+                                    text:
+                                        _checkOut == null
+                                            ? ''
+                                            : _checkOut!
+                                                .toLocal()
+                                                .toString()
+                                                .split(' ')[0],
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF1B1A55),
-                                  hintText:
-                                      _checkOut == null
-                                          ? 'Select date'
-                                          : _checkOut!
-                                              .toLocal()
-                                              .toString()
-                                              .split(' ')[0],
+                                  readOnly: true,
                                 ),
-                                controller: TextEditingController(
-                                  text:
-                                      _checkOut == null
-                                          ? ''
-                                          : _checkOut!
-                                              .toLocal()
-                                              .toString()
-                                              .split(' ')[0],
-                                ),
-                                readOnly: true,
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 100,
-                          child: DropdownButtonFormField<int>(
-                            value: _guests,
-                            decoration: const InputDecoration(
-                              labelText: 'Guests',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
-                            ),
-                            items:
-                                List.generate(27, (i) => i + 1)
-                                    .map(
-                                      (n) => DropdownMenuItem(
-                                        value: n,
-                                        child: Text('$n'),
-                                      ),
-                                    )
-                                    .toList(),
-                            onChanged: (val) => _onGuestsChanged(val ?? 1),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 100,
-                          child: DropdownButtonFormField<int>(
-                            value: _rooms,
-                            decoration: const InputDecoration(
-                              labelText: 'Rooms',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
-                            ),
-                            items:
-                                List.generate(
-                                      9,
-                                      (i) =>
-                                          i +
-                                          (_guests / _maxGuestsPerRoom).ceil(),
-                                    )
-                                    .map(
-                                      (n) => DropdownMenuItem(
-                                        value: n,
-                                        child: Text('$n'),
-                                      ),
-                                    )
-                                    .toList(),
-                            onChanged:
-                                (val) => setState(
-                                  () =>
-                                      _rooms =
-                                          val ??
-                                          (_guests / _maxGuestsPerRoom).ceil(),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 100,
+                            child: DropdownButtonFormField<int>(
+                              value: _guests,
+                              decoration: const InputDecoration(
+                                labelText: 'Guests',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
                                 ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 100,
-                          child: DropdownButtonFormField<int>(
-                            value: _minStars,
-                            decoration: const InputDecoration(
-                              labelText: 'Stars',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
                               ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
+                              items:
+                                  List.generate(27, (i) => i + 1)
+                                      .map(
+                                        (n) => DropdownMenuItem(
+                                          value: n,
+                                          child: Text('$n'),
+                                        ),
+                                      )
+                                      .toList(),
+                              onChanged: (val) => _onGuestsChanged(val ?? 1),
                             ),
-                            items: [
-                              const DropdownMenuItem<int>(
-                                value: null,
-                                child: Text('Any'),
-                              ),
-                              ...[1, 2, 3, 4, 5].map(
-                                (s) => DropdownMenuItem(
-                                  value: s,
-                                  child: Text('$s★'),
-                                ),
-                              ),
-                            ],
-                            onChanged: (val) {
-                              setState(() {
-                                _minStars = val;
-                                _filterHotels();
-                              });
-                            },
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        Column(
-                          children: [
-                            Checkbox(
-                              value: _freeCancellation,
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 100,
+                            child: DropdownButtonFormField<int>(
+                              value: _rooms,
+                              decoration: const InputDecoration(
+                                labelText: 'Rooms',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
+                              ),
+                              items:
+                                  List.generate(
+                                        9,
+                                        (i) =>
+                                            i +
+                                            (_guests / _maxGuestsPerRoom)
+                                                .ceil(),
+                                      )
+                                      .map(
+                                        (n) => DropdownMenuItem(
+                                          value: n,
+                                          child: Text('$n'),
+                                        ),
+                                      )
+                                      .toList(),
+                              onChanged:
+                                  (val) => setState(
+                                    () =>
+                                        _rooms =
+                                            val ??
+                                            (_guests / _maxGuestsPerRoom)
+                                                .ceil(),
+                                  ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 100,
+                            child: DropdownButtonFormField<int>(
+                              value: _minStars,
+                              decoration: const InputDecoration(
+                                labelText: 'Stars',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
+                              ),
+                              items: [
+                                const DropdownMenuItem<int>(
+                                  value: null,
+                                  child: Text('Any'),
+                                ),
+                                ...[1, 2, 3, 4, 5].map(
+                                  (s) => DropdownMenuItem(
+                                    value: s,
+                                    child: Text('$s★'),
+                                  ),
+                                ),
+                              ],
                               onChanged: (val) {
                                 setState(() {
-                                  _freeCancellation = val ?? false;
+                                  _minStars = val;
                                   _filterHotels();
                                 });
                               },
                             ),
-                            const Text('Free Cancellation'),
-                          ],
-                        ),
-                        const SizedBox(width: 8),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.filter_alt,
-                            color: Color(0xFF77B0AA),
                           ),
-                          tooltip: 'Filters',
-                          onPressed: _showFiltersSheet,
-                        ),
-                      ],
+                          const SizedBox(width: 8),
+                          Column(
+                            children: [
+                              Checkbox(
+                                value: _freeCancellation,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _freeCancellation = val ?? false;
+                                    _filterHotels();
+                                  });
+                                },
+                              ),
+                              const Text('Free Cancellation'),
+                            ],
+                          ),
+                          const SizedBox(width: 8),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.filter_alt,
+                              color: Color(0xFF77B0AA),
+                            ),
+                            tooltip: 'Filters',
+                            onPressed: _showFiltersSheet,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 40),
-                Expanded(
-                  child:
-                      _loading
-                          ? const Center(child: CircularProgressIndicator())
-                          : _filteredHotels.isEmpty
-                          ? const Center(child: Text('No hotels found.'))
-                          : GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 24,
-                                  mainAxisSpacing: 24,
-                                  childAspectRatio: 1.7,
-                                ),
-                            itemCount: _filteredHotels.length,
-                            itemBuilder: (context, i) {
-                              final hotel = _filteredHotels[i];
-                              // Calculate nights and total price
-                              final nights =
-                                  (_checkIn != null && _checkOut != null)
-                                      ? _checkOut!.difference(_checkIn!).inDays
-                                      : 1;
-                              final pricePerNight =
-                                  hotel.price *
-                                  (_freeCancellation ? 1.06 : 1.0);
-                              final totalPrice =
-                                  pricePerNight *
-                                  (nights > 0 ? nights : 1) *
-                                  _rooms;
-                              return InkWell(
-                                borderRadius: BorderRadius.circular(20),
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder:
-                                        (context) => AlertDialog(
-                                          title: Text(
-                                            hotel.name,
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                  const SizedBox(height: 40),
+                  _loading
+                      ? const Center(child: CircularProgressIndicator())
+                      : _filteredHotels.isEmpty
+                      ? const Center(child: Text('No hotels found.'))
+                      : GridView.builder(
+                        shrinkWrap: true, // Added shrinkWrap
+                        physics:
+                            const NeverScrollableScrollPhysics(), // Added physics
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 24,
+                              mainAxisSpacing: 24,
+                              childAspectRatio: 1.7,
+                            ),
+                        itemCount: _filteredHotels.length,
+                        itemBuilder: (context, i) {
+                          final hotel = _filteredHotels[i];
+                          // Calculate nights and total price
+                          final nights =
+                              (_checkIn != null && _checkOut != null)
+                                  ? _checkOut!.difference(_checkIn!).inDays
+                                  : 1;
+                          final pricePerNight =
+                              hotel.price * (_freeCancellation ? 1.06 : 1.0);
+                          final totalPrice =
+                              pricePerNight *
+                              (nights > 0 ? nights : 1) *
+                              _rooms;
+                          return InkWell(
+                            borderRadius: BorderRadius.circular(20),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (context) => AlertDialog(
+                                      title: Text(
+                                        hotel.name,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      content: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'City: ${hotel.city}',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
                                             ),
-                                          ),
-                                          content: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'City: ${hotel.city}',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Country: ${hotel.country}',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: List.generate(
-                                                    hotel.stars,
-                                                    (index) => const Icon(
-                                                      Icons.star,
-                                                      color: Color(0xFF77B0AA),
-                                                      size: 18,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Guests: $_guests',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Rooms: $_rooms',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Check-in: ${_checkIn != null ? _checkIn!.toLocal().toString().split(' ')[0] : '-'}',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Check-out: ${_checkOut != null ? _checkOut!.toLocal().toString().split(' ')[0] : '-'}',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Price: \$${hotel.price.toStringAsFixed(2)}',
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                              ],
+                                            Text(
+                                              'Country: ${hotel.country}',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
                                             ),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                foregroundColor: Color(
-                                                  0xFF535C91,
-                                                ),
-                                                textStyle: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                            Row(
+                                              children: List.generate(
+                                                hotel.stars,
+                                                (index) => const Icon(
+                                                  Icons.star,
+                                                  color: Color(0xFF77B0AA),
+                                                  size: 18,
                                                 ),
                                               ),
-                                              child: const Text('Close'),
-                                              onPressed:
-                                                  () => Navigator.pop(context),
                                             ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Color(
-                                                  0xFF1B1A55,
-                                                ),
-                                                foregroundColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      horizontal: 24,
-                                                      vertical: 12,
-                                                    ),
-                                                textStyle: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
-                                                ),
+                                            Text(
+                                              'Guests: $_guests',
+                                              style: const TextStyle(
+                                                fontSize: 16,
                                               ),
-                                              child: const Text('Book'),
-                                              onPressed: () async {
-                                                await BookingService()
-                                                    .addBooking({
-                                                      'type': 'hotel',
-                                                      'hotelName': hotel.name,
-                                                      'city': hotel.city,
-                                                      'country': hotel.country,
-                                                      'stars': hotel.stars,
-                                                      'guests': _guests,
-                                                      'rooms': _rooms,
-                                                      'checkIn':
-                                                          _checkIn != null
-                                                              ? _checkIn!
-                                                                  .toLocal()
-                                                                  .toString()
-                                                                  .split(' ')[0]
-                                                              : '',
-                                                      'checkOut':
-                                                          _checkOut != null
-                                                              ? _checkOut!
-                                                                  .toLocal()
-                                                                  .toString()
-                                                                  .split(' ')[0]
-                                                              : '',
-                                                      'price': hotel.price,
-                                                    });
-                                                if (mounted) {
-                                                  Navigator.pop(context);
-                                                }
-                                                ScaffoldMessenger.of(
-                                                  context,
-                                                ).showSnackBar(
-                                                  const SnackBar(
-                                                    content: Text(
-                                                      'Hotel booked!',
-                                                    ),
-                                                  ),
-                                                );
-                                              },
+                                            ),
+                                            Text(
+                                              'Rooms: $_rooms',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Check-in: ${_checkIn != null ? _checkIn!.toLocal().toString().split(' ')[0] : '-'}',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Check-out: ${_checkOut != null ? _checkOut!.toLocal().toString().split(' ')[0] : '-'}',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Price: \$${hotel.price.toStringAsFixed(2)}',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ],
                                         ),
-                                  );
-                                },
-                                child: Card(
-                                  elevation: 8,
-                                  margin: EdgeInsets.zero,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  color: Color(0xFF1B1A55),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(
-                                      18.0,
-                                    ), // half the padding
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          hotel.name,
-                                          style: const TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xFFE3FEF7),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Color(0xFF535C91),
+                                            textStyle: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
+                                          child: const Text('Close'),
+                                          onPressed:
+                                              () => Navigator.pop(context),
                                         ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          '${hotel.city}, ${hotel.country}',
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            color: Color(0xFF77B0AA),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF1B1A55),
+                                            foregroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 24,
+                                              vertical: 12,
+                                            ),
+                                            textStyle: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 1.5,
-                                          ),
-                                          child: Row(
-                                            children: List.generate(
-                                              hotel.stars,
-                                              (index) => const Icon(
-                                                Icons.star,
-                                                color: Color(0xFF77B0AA),
-                                                size: 18,
+                                          child: const Text('Book'),
+                                          onPressed: () async {
+                                            if (_checkIn == null ||
+                                                _checkOut == null) {
+                                              Navigator.of(
+                                                context,
+                                              ).pop(); // Close dialog
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'Please select check-in and check-out dates first.',
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.orangeAccent,
+                                                ),
+                                              );
+                                              return;
+                                            }
+                                            if (_checkOut!.isBefore(
+                                                  _checkIn!,
+                                                ) ||
+                                                _checkOut!.isAtSameMomentAs(
+                                                  _checkIn!,
+                                                )) {
+                                              Navigator.of(
+                                                context,
+                                              ).pop(); // Close dialog
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'Check-out date must be after check-in date.',
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.orangeAccent,
+                                                ),
+                                              );
+                                              return;
+                                            }
+
+                                            final accountService =
+                                                Provider.of<AccountService>(
+                                                  context,
+                                                  listen: false,
+                                                );
+                                            final Account? account =
+                                                await accountService
+                                                    .getCurrentAccount();
+
+                                            if (account == null) {
+                                              Navigator.of(
+                                                context,
+                                              ).pop(); // Close dialog
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'You must be logged in to book a hotel.',
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.redAccent,
+                                                ),
+                                              );
+                                              return;
+                                            }
+
+                                            await accountService
+                                                .addHotelBooking(
+                                                  hotel,
+                                                  _checkIn!,
+                                                  _checkOut!,
+                                                  _guests,
+                                                  _rooms,
+                                                );
+                                            if (mounted) {
+                                              Navigator.pop(
+                                                context,
+                                              ); // Close dialog
+                                            }
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              const SnackBar(
+                                                content: Text('Hotel booked!'),
+                                                backgroundColor: Colors.green,
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          'Type: ${hotel.type}',
-                                          style: const TextStyle(
-                                            color: Color(0xFF77B0AA),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        if (_freeCancellation)
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  'Total: \$${totalPrice.toStringAsFixed(0)}',
-                                                  style: const TextStyle(
-                                                    color: Color(
-                                                      0xFF80F3E7,
-                                                    ), // Highlight for free cancellation
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '($nights night${nights == 1 ? '' : 's'}, $_rooms room${_rooms == 1 ? '' : 's'})',
-                                                  style: const TextStyle(
-                                                    color: Color(0xFFA1C5C2),
-                                                    fontSize: 13,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Per night per room: \$${pricePerNight.toStringAsFixed(2)}',
-                                                  style: const TextStyle(
-                                                    color: Color(0xFFA1C5C2),
-                                                    fontSize: 13,
-                                                  ),
-                                                ),
-                                                const Text(
-                                                  'Free Cancellation',
-                                                  style: TextStyle(
-                                                    color: Color(0xFFE7ABAB),
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    fontSize: 12,
-                                                    letterSpacing: 1.1,
-                                                    height: 1.5,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        else
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  'Total: \$${totalPrice.toStringAsFixed(0)}',
-                                                  style: const TextStyle(
-                                                    color: Color(0xFF80F3E7),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '($nights night${nights == 1 ? '' : 's'}, $_rooms room${_rooms == 1 ? '' : 's'})',
-                                                  style: const TextStyle(
-                                                    color: Color(0xFFA1C5C2),
-                                                    fontSize: 13,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Per night per room: \$${pricePerNight.toStringAsFixed(2)}',
-                                                  style: const TextStyle(
-                                                    color: Color(0xFFA1C5C2),
-                                                    fontSize: 13,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
                                       ],
                                     ),
-                                  ),
-                                ),
                               );
                             },
-                          ),
-                ),
-              ],
+                            child: Card(
+                              elevation: 8,
+                              margin: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              color: Color(0xFF1B1A55),
+                              child: Padding(
+                                padding: const EdgeInsets.all(
+                                  18.0,
+                                ), // half the padding
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      hotel.name,
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFFE3FEF7),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      '${hotel.city}, ${hotel.country}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xFF77B0AA),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 1.5),
+                                      child: Row(
+                                        children: List.generate(
+                                          hotel.stars,
+                                          (index) => const Icon(
+                                            Icons.star,
+                                            color: Color(0xFF77B0AA),
+                                            size: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Type: ${hotel.type}',
+                                      style: const TextStyle(
+                                        color: Color(0xFF77B0AA),
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    if (_freeCancellation)
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              'Total: \$${totalPrice.toStringAsFixed(0)}',
+                                              style: const TextStyle(
+                                                color: Color(
+                                                  0xFF80F3E7,
+                                                ), // Highlight for free cancellation
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              '($nights night${nights == 1 ? '' : 's'}, $_rooms room${_rooms == 1 ? '' : 's'})',
+                                              style: const TextStyle(
+                                                color: Color(0xFFA1C5C2),
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Per night per room: \$${pricePerNight.toStringAsFixed(2)}',
+                                              style: const TextStyle(
+                                                color: Color(0xFFA1C5C2),
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                            const Text(
+                                              'Free Cancellation',
+                                              style: TextStyle(
+                                                color: Color(0xFFE7ABAB),
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 12,
+                                                letterSpacing: 1.1,
+                                                height: 1.5,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    else
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              'Total: \$${totalPrice.toStringAsFixed(0)}',
+                                              style: const TextStyle(
+                                                color: Color(0xFF80F3E7),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              '($nights night${nights == 1 ? '' : 's'}, $_rooms room${_rooms == 1 ? '' : 's'})',
+                                              style: const TextStyle(
+                                                color: Color(0xFFA1C5C2),
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Per night per room: \$${pricePerNight.toStringAsFixed(2)}',
+                                              style: const TextStyle(
+                                                color: Color(0xFFA1C5C2),
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                ],
+              ),
             ),
           ),
         ),

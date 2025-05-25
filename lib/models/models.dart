@@ -5,6 +5,7 @@ class Flight {
   final String origin;
   final String destination;
   final String carrier;
+  final String? carrierLogo; // Added for airline logo
   final String recurrence;
   final String departureTime;
   final String arrivalTime;
@@ -21,6 +22,7 @@ class Flight {
     required this.origin,
     required this.destination,
     required this.carrier,
+    this.carrierLogo, // Added
     required this.recurrence,
     required this.departureTime,
     required this.arrivalTime,
@@ -38,6 +40,7 @@ class Flight {
     origin: json['origin'],
     destination: json['destination'],
     carrier: json['carrier'],
+    carrierLogo: json['carrierLogo'], // Added
     recurrence: json['recurrence'],
     departureTime: json['departure_time'],
     arrivalTime: json['arrival_time'],
@@ -225,4 +228,58 @@ class Car {
         (json['engine_l'] as num?)?.toDouble(), // Added - matching 'engine_l'
     color: json['color']?.toString(), // Added
   );
+}
+
+class Account {
+  final String id; // Added unique ID
+  final String email;
+  final String phoneNumber;
+  final String lastName;
+  final String firstName;
+  String
+  password; // TODO: Implement secure password hashing in a real application
+  String username;
+  final Map<String, List<Map<String, dynamic>>> bookings;
+
+  Account({
+    required this.id, // Added
+    required this.email,
+    required this.phoneNumber,
+    required this.lastName,
+    required this.firstName,
+    required this.password,
+    required this.username,
+    Map<String, List<Map<String, dynamic>>>? bookings,
+  }) : bookings = bookings ?? {'flights': [], 'hotels': [], 'cars': []};
+
+  // factory Account.fromJson(Map<String, dynamic> json) => Account(
+  //       id: json['id'], // Added
+  //       email: json['email'],
+  //       phoneNumber: json['phoneNumber'],
+  //       lastName: json['lastName'],
+  //       firstName: json['firstName'],
+  //       password: json['password'], // TODO: Handle hashed password retrieval
+  //       username: json['username'],
+  //       bookings: json['bookings'] != null
+  //           ? (json['bookings'] as Map<String, dynamic>).map(
+  //               (key, value) => MapEntry(
+  //                 key,
+  //                 (value as List<dynamic>)
+  //                     .map((item) => item as Map<String, dynamic>)
+  //                     .toList(),
+  //               ),
+  //             )
+  //           : {'flights': [], 'hotels': [], 'cars': []},
+  //     );
+
+  // Map<String, dynamic> toJson() => {
+  //       'id': id, // Added
+  //       'email': email,
+  //       'phoneNumber': phoneNumber,
+  //       'lastName': lastName,
+  //       'firstName': firstName,
+  //       'password': password, // TODO: Store hashed password
+  //       'username': username,
+  //       'bookings': bookings,
+  //     };
 }

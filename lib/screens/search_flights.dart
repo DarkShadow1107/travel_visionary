@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Ensured provider is imported
 import '../models/models.dart';
 import '../services/services.dart';
 
@@ -265,13 +266,24 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
             final matchesDate = _flightMatchesDate(f, _departureDate);
             final matchesAirline =
                 _selectedAirline == null || f.carrier == _selectedAirline;
-            final matchesPrice = _maxPrice == null || f.price <= _maxPrice!;
+
+            // Updated class and price matching logic
             final matchesClass =
                 _flightClass.isEmpty ||
-                f.supportedClasses.contains(_flightClass);
+                (f.supportedClasses.contains(_flightClass) &&
+                    f.classPrices.containsKey(_flightClass) &&
+                    f.classPrices[_flightClass]! > 0);
+
+            final priceForSelectedClass = f.classPrices[_flightClass];
+            final matchesPrice =
+                _maxPrice == null ||
+                (priceForSelectedClass != null &&
+                    priceForSelectedClass <= _maxPrice!);
+
             final seatsAvailable =
                 (f.seatsAvailable[_flightClass] != null &&
                     f.seatsAvailable[_flightClass]! >= _passengers);
+
             return matchesFrom &&
                 matchesTo &&
                 matchesDate &&
@@ -386,292 +398,299 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent, // Allow main gradient to show
       body: SafeArea(
-        child: Center(
-          child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: 1240,
-            ), // 350 + 540 + 350
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Find Your Perfect Flight',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '${_filteredFlights.length} results found',
-                  style: const TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-                const SizedBox(height: 24),
-                Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 210,
-                          child: TextFormField(
-                            controller: _fromController,
-                            decoration: const InputDecoration(
-                              labelText: 'From',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a departure location';
-                              }
-                              return null;
-                            },
-                            onChanged: (val) {
-                              setState(() {
-                                _from = val;
-                                _fromSuggestions =
-                                    _getUniqueOrigins(_flights)
-                                        .where(
-                                          (o) => o.toLowerCase().contains(
-                                            val.toLowerCase(),
-                                          ),
-                                        )
-                                        .toList();
-                                _filterFlights();
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 210,
-                          child: TextFormField(
-                            controller: _toController,
-                            decoration: const InputDecoration(
-                              labelText: 'To',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a destination';
-                              }
-                              return null;
-                            },
-                            onChanged: (val) {
-                              setState(() {
-                                _to = val;
-                                _toSuggestions =
-                                    _getUniqueDestinations(_flights)
-                                        .where(
-                                          (d) => d.toLowerCase().contains(
-                                            val.toLowerCase(),
-                                          ),
-                                        )
-                                        .toList();
-                                _filterFlights();
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 150,
-                          child: GestureDetector(
-                            onTap: () => _showDatePickerSheet(isReturn: false),
-                            child: AbsorbPointer(
-                              child: TextFormField(
-                                controller: _departureDateController,
-                                decoration: InputDecoration(
-                                  labelText: 'Departure Date',
-                                  hintText: 'Select date',
-                                  labelStyle: TextStyle(
-                                    color: Color(0xFF77B0AA),
-                                  ),
-                                  floatingLabelStyle: TextStyle(
-                                    color: Color(0xFF77B0AA),
-                                  ),
-                                  filled: true,
-                                  fillColor: Color(0xFF1B1A55),
+        child: SingleChildScrollView(
+          // Wrap Center with SingleChildScrollView
+          child: Center(
+            child: Container(
+              constraints: const BoxConstraints(
+                maxWidth: 1240,
+              ), // 350 + 540 + 350
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Find Your Perfect Flight',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${_filteredFlights.length} results found',
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 24),
+                  Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 210,
+                            child: TextFormField(
+                              controller: _fromController,
+                              decoration: const InputDecoration(
+                                labelText: 'From',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
                                 ),
-                                readOnly: true,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please select a departure date';
-                                  }
-                                  return null;
-                                },
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
                               ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a departure location';
+                                }
+                                return null;
+                              },
+                              onChanged: (val) {
+                                setState(() {
+                                  _from = val;
+                                  _fromSuggestions =
+                                      _getUniqueOrigins(_flights)
+                                          .where(
+                                            (o) => o.toLowerCase().contains(
+                                              val.toLowerCase(),
+                                            ),
+                                          )
+                                          .toList();
+                                  _filterFlights();
+                                });
+                              },
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 150,
-                          child: GestureDetector(
-                            onTap: () => _showDatePickerSheet(isReturn: true),
-                            child: AbsorbPointer(
-                              child: TextFormField(
-                                controller: _returnDateController,
-                                decoration: InputDecoration(
-                                  labelText: 'Return Date',
-                                  hintText: 'Select date',
-                                  labelStyle: TextStyle(
-                                    color: Color(0xFF77B0AA),
-                                  ),
-                                  floatingLabelStyle: TextStyle(
-                                    color: Color(0xFF77B0AA),
-                                  ),
-                                  filled: true,
-                                  fillColor: Color(0xFF1B1A55),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 210,
+                            child: TextFormField(
+                              controller: _toController,
+                              decoration: const InputDecoration(
+                                labelText: 'To',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
                                 ),
-                                readOnly: true,
-                                validator: (value) {
-                                  if (_isRoundTrip &&
-                                      (value == null || value.isEmpty)) {
-                                    return 'Please select a return date';
-                                  }
-                                  return null;
-                                },
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
                               ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a destination';
+                                }
+                                return null;
+                              },
+                              onChanged: (val) {
+                                setState(() {
+                                  _to = val;
+                                  _toSuggestions =
+                                      _getUniqueDestinations(_flights)
+                                          .where(
+                                            (d) => d.toLowerCase().contains(
+                                              val.toLowerCase(),
+                                            ),
+                                          )
+                                          .toList();
+                                  _filterFlights();
+                                });
+                              },
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 100,
-                          child: DropdownButtonFormField<int>(
-                            value: _passengers,
-                            decoration: const InputDecoration(
-                              labelText: 'Passengers',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
-                            ),
-                            items:
-                                List.generate(9, (i) => i + 1)
-                                    .map(
-                                      (n) => DropdownMenuItem(
-                                        value: n,
-                                        child: Text('$n'),
-                                      ),
-                                    )
-                                    .toList(),
-                            onChanged:
-                                (val) => setState(() => _passengers = val ?? 1),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 200, // Reduce width to prevent overflow
-                          child: DropdownButtonFormField<String>(
-                            value: _flightClass,
-                            decoration: const InputDecoration(
-                              labelText: 'Class',
-                              labelStyle: TextStyle(color: Color(0xFF77B0AA)),
-                              floatingLabelStyle: TextStyle(
-                                color: Color(0xFF77B0AA),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF1B1A55),
-                              isDense: true,
-                              contentPadding: EdgeInsets.only(
-                                left: 12,
-                                right: 16,
-                                top: 16,
-                                bottom: 16,
-                              ),
-                            ),
-                            icon: Padding(
-                              padding: const EdgeInsets.only(left: 0, right: 0),
-                              child: Icon(
-                                Icons.arrow_drop_down,
-                                color: Color(0xFF77B0AA),
-                              ),
-                            ),
-                            items: const [
-                              DropdownMenuItem(
-                                value: 'Economy',
-                                child: Text('Economy'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'Premium Economy',
-                                child: Text('Premium Economy'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'Business',
-                                child: Text('Business'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'First Class',
-                                child: Text('First Class'),
-                              ),
-                            ],
-                            onChanged:
-                                (val) => setState(
-                                  () => _flightClass = val ?? 'Economy',
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 150,
+                            child: GestureDetector(
+                              onTap:
+                                  () => _showDatePickerSheet(isReturn: false),
+                              child: AbsorbPointer(
+                                child: TextFormField(
+                                  controller: _departureDateController,
+                                  decoration: InputDecoration(
+                                    labelText: 'Departure Date',
+                                    hintText: 'Select date',
+                                    labelStyle: TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    floatingLabelStyle: TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0xFF1B1A55),
+                                  ),
+                                  readOnly: true,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please select a departure date';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Checkbox(
-                                value: _isRoundTrip,
-                                onChanged: (val) {
-                                  setState(() => _isRoundTrip = val ?? false);
-                                },
                               ),
-                              const Text('Round Trip'),
-                            ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.filter_alt,
-                            color: Color(0xFF77B0AA),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 150,
+                            child: GestureDetector(
+                              onTap: () => _showDatePickerSheet(isReturn: true),
+                              child: AbsorbPointer(
+                                child: TextFormField(
+                                  controller: _returnDateController,
+                                  decoration: InputDecoration(
+                                    labelText: 'Return Date',
+                                    hintText: 'Select date',
+                                    labelStyle: TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    floatingLabelStyle: TextStyle(
+                                      color: Color(0xFF77B0AA),
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0xFF1B1A55),
+                                  ),
+                                  readOnly: true,
+                                  validator: (value) {
+                                    if (_isRoundTrip &&
+                                        (value == null || value.isEmpty)) {
+                                      return 'Please select a return date';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
                           ),
-                          tooltip: 'Filters',
-                          onPressed: _showFiltersSheet,
-                        ),
-                      ],
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 100,
+                            child: DropdownButtonFormField<int>(
+                              value: _passengers,
+                              decoration: const InputDecoration(
+                                labelText: 'Passengers',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
+                              ),
+                              items:
+                                  List.generate(9, (i) => i + 1)
+                                      .map(
+                                        (n) => DropdownMenuItem(
+                                          value: n,
+                                          child: Text('$n'),
+                                        ),
+                                      )
+                                      .toList(),
+                              onChanged:
+                                  (val) =>
+                                      setState(() => _passengers = val ?? 1),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 200, // Reduce width to prevent overflow
+                            child: DropdownButtonFormField<String>(
+                              value: _flightClass,
+                              decoration: const InputDecoration(
+                                labelText: 'Class',
+                                labelStyle: TextStyle(color: Color(0xFF77B0AA)),
+                                floatingLabelStyle: TextStyle(
+                                  color: Color(0xFF77B0AA),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFF1B1A55),
+                                isDense: true,
+                                contentPadding: EdgeInsets.only(
+                                  left: 12,
+                                  right: 16,
+                                  top: 16,
+                                  bottom: 16,
+                                ),
+                              ),
+                              icon: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 0,
+                                  right: 0,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Color(0xFF77B0AA),
+                                ),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'Economy',
+                                  child: Text('Economy'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Premium Economy',
+                                  child: Text('Premium Economy'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Business',
+                                  child: Text('Business'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'First Class',
+                                  child: Text('First Class'),
+                                ),
+                              ],
+                              onChanged:
+                                  (val) => setState(
+                                    () => _flightClass = val ?? 'Economy',
+                                  ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 100,
+                            child: Column(
+                              children: [
+                                Checkbox(
+                                  value: _isRoundTrip,
+                                  onChanged: (val) {
+                                    setState(() => _isRoundTrip = val ?? false);
+                                  },
+                                ),
+                                const Text('Round Trip'),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.filter_alt,
+                              color: Color(0xFF77B0AA),
+                            ),
+                            tooltip: 'Filters',
+                            onPressed: _showFiltersSheet,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                _loading
-                    ? const Center(child: CircularProgressIndicator())
-                    : Expanded(
-                      child: GridView.builder(
+                  const SizedBox(height: 16),
+                  _loading
+                      ? const Center(child: CircularProgressIndicator())
+                      : GridView.builder(
+                        // Removed Expanded widget
+                        shrinkWrap: true, // Added shrinkWrap
+                        physics:
+                            const NeverScrollableScrollPhysics(), // Added physics
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 32,
                               mainAxisSpacing: 32,
-                              childAspectRatio: 1.7,
+                              childAspectRatio: 1.55,
                             ),
                         itemCount: _filteredFlights.length,
                         itemBuilder: (context, i) {
                           final flight = _filteredFlights[i];
-                          final showAllPrices =
-                              _flightClass.isEmpty ||
-                              !_flightClass.trim().isNotEmpty ||
-                              !flight.supportedClasses.contains(_flightClass);
+                          // Removed showAllPrices, as we now always show the selected class price
                           return InkWell(
                             borderRadius: BorderRadius.circular(28),
                             onTap: () {
@@ -759,47 +778,12 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                                               fontSize: 16,
                                             ),
                                           ),
-                                          if (showAllPrices) ...[
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children:
-                                                  flight.classPrices.entries.map((
-                                                    e,
-                                                  ) {
-                                                    final total =
-                                                        e.value * _passengers;
-                                                    return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Price: \$${total.toStringAsFixed(2)} ($_passengers passengers, ${e.key})',
-                                                          style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Color(
-                                                              0xFFE3FEF7,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        if (_passengers > 1)
-                                                          Text(
-                                                            '(\$${e.value.toStringAsFixed(2)} per person)',
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              color: Color(
-                                                                0xFFE3FEF7,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                      ],
-                                                    );
-                                                  }).toList(),
-                                            ),
-                                          ] else ...[
+                                          // Display only the price for the selected class
+                                          if (flight.classPrices.containsKey(
+                                                _flightClass,
+                                              ) &&
+                                              flight.classPrices[_flightClass]! >
+                                                  0)
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -821,8 +805,15 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                                                     ),
                                                   ),
                                               ],
+                                            )
+                                          else
+                                            Text(
+                                              'Price not available for $_flightClass',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.grey,
+                                              ),
                                             ),
-                                          ],
                                         ],
                                       ),
                                       actionsPadding: const EdgeInsets.fromLTRB(
@@ -847,29 +838,75 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                                           ),
                                           child: const Text('Book'),
                                           onPressed: () async {
-                                            await BookingService().addBooking({
-                                              'type': 'flight',
-                                              'origin': flight.origin,
-                                              'destination': flight.destination,
-                                              'carrier': flight.carrier,
-                                              'date': _getDisplayDate(flight),
-                                              'departureTime':
-                                                  flight.departureTime,
-                                              'arrivalTime': flight.arrivalTime,
-                                              'price':
-                                                  flight
-                                                      .classPrices[_flightClass] ??
-                                                  flight.price,
-                                              'flightClass': _flightClass,
-                                              'passengers': _passengers,
-                                              'aircraft': flight.aircraft,
-                                            });
-                                            if (mounted) Navigator.pop(context);
+                                            // Made onPressed async
+                                            final accountService =
+                                                Provider.of<AccountService>(
+                                                  context,
+                                                  listen: false,
+                                                );
+                                            final Account? account =
+                                                await accountService
+                                                    .getCurrentAccount();
+
+                                            if (account == null) {
+                                              Navigator.of(
+                                                context,
+                                              ).pop(); // Close dialog
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'You must be logged in to book a flight.',
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.redAccent,
+                                                ),
+                                              );
+                                              return;
+                                            }
+
+                                            // Ensure _departureDate is not null before proceeding
+                                            if (_departureDate == null) {
+                                              Navigator.of(
+                                                context,
+                                              ).pop(); // Close dialog
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'Please select a departure date first.',
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.orangeAccent,
+                                                ),
+                                              );
+                                              return;
+                                            }
+
+                                            // Corrected parameters for addFlightBooking
+                                            await accountService.addFlightBooking(
+                                              flight, // Flight object
+                                              _flightClass, // String selectedClass
+                                              _passengers, // int numTickets
+                                              // _departureDate and _returnDate are not direct params for this service method
+                                              // The service method itself uses DateTime.now() for bookedAt
+                                              // and flight details for dates if needed by the model structure.
+                                              // If departure/return dates need to be part of the *booking record* itself,
+                                              // then the addFlightBooking method in AccountService and the Flight booking map needs adjustment.
+                                              // For now, assuming the service handles date logic based on the Flight object and internal logic.
+                                            );
+                                            if (mounted)
+                                              Navigator.pop(
+                                                context,
+                                              ); // Close dialog
                                             ScaffoldMessenger.of(
                                               context,
                                             ).showSnackBar(
                                               const SnackBar(
                                                 content: Text('Flight booked!'),
+                                                backgroundColor: Colors.green,
                                               ),
                                             );
                                           },
@@ -886,10 +923,47 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                               ),
                               color: Color(0xFF1B1A55),
                               child: Padding(
-                                padding: const EdgeInsets.all(36.0),
+                                padding: const EdgeInsets.only(
+                                  top: 16.0,
+                                  left: 24.0,
+                                  right: 24.0,
+                                  bottom: 24.0,
+                                ), // Adjust top padding
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .start, // Align children to the start (top)
                                   children: [
+                                    if (flight.carrierLogo != null &&
+                                        flight.carrierLogo!.isNotEmpty)
+                                      Container(
+                                        width:
+                                            180, // Increased width for the container
+                                        height:
+                                            60, // Increased height for the container
+                                        padding: const EdgeInsets.all(8.0),
+                                        margin: const EdgeInsets.only(
+                                          bottom: 18.0,
+                                        ), // Increased bottom margin
+                                        decoration: BoxDecoration(
+                                          color: const Color(
+                                            0xFFFFFFFF,
+                                          ), // White background
+                                          borderRadius: BorderRadius.circular(
+                                            8.0,
+                                          ),
+                                        ),
+                                        child: Image.asset(
+                                          flight.carrierLogo!,
+                                          // height: 35, // Remove fixed height from Image.asset
+                                          // width: 100, // Remove fixed width from Image.asset
+                                          fit:
+                                              BoxFit
+                                                  .contain, // BoxFit.contain will scale down if needed, maintaining aspect ratio
+                                          alignment: Alignment.centerLeft,
+                                        ),
+                                      ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -977,42 +1051,11 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                                       ),
                                     ),
                                     const SizedBox(height: 12),
-                                    if (showAllPrices)
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children:
-                                            flight.classPrices.entries.map((e) {
-                                              final total =
-                                                  e.value * _passengers;
-                                              return Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Price: \$${total.toStringAsFixed(2)} ($_passengers passengers, ${e.key})',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color(0xFFE3FEF7),
-                                                    ),
-                                                  ),
-                                                  if (_passengers > 1)
-                                                    Text(
-                                                      '(\$${e.value.toStringAsFixed(2)} per person)',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        color: Color(
-                                                          0xFFE3FEF7,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                ],
-                                              );
-                                            }).toList(),
-                                      )
-                                    else
+                                    // Display only the price for the selected class
+                                    if (flight.classPrices.containsKey(
+                                          _flightClass,
+                                        ) &&
+                                        flight.classPrices[_flightClass]! > 0)
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -1034,6 +1077,14 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                                               ),
                                             ),
                                         ],
+                                      )
+                                    else
+                                      Text(
+                                        'Price not available for $_flightClass',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.grey,
+                                        ),
                                       ),
                                   ],
                                 ),
@@ -1042,8 +1093,8 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen> {
                           );
                         },
                       ),
-                    ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
