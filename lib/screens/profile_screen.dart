@@ -560,8 +560,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         const SizedBox(height: 20),
-        ConstrainedBox( // Added to make the card shorter in width
-          constraints: const BoxConstraints(maxWidth: 350), // Limits the width of the card
+        ConstrainedBox(
+          // Added to make the card shorter in width
+          constraints: const BoxConstraints(
+            maxWidth: 350,
+          ), // Limits the width of the card
           child: Card(
             elevation: 4,
             shape: RoundedRectangleBorder(
@@ -571,7 +574,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               0xFF070F2B,
             ).withOpacity(0.8), // Slightly transparent dark card
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0), // Reduced vertical padding
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ), // Reduced vertical padding
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -628,7 +634,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0), // Slightly increased vertical padding for rows
+      padding: const EdgeInsets.symmetric(
+        vertical: 6.0,
+      ), // Slightly increased vertical padding for rows
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
