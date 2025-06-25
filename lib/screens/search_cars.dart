@@ -858,7 +858,7 @@ class _SearchCarsScreenState extends State<SearchCarsScreen> {
                                                 _buildDetailRowDialog(
                                                   title: 'Price/Day',
                                                   value:
-                                                      '\\${car.price.toStringAsFixed(2)}',
+                                                      '\$${car.price.toStringAsFixed(2)}',
                                                   context: dialogContext,
                                                   icon: Icons.monetization_on,
                                                 ),
@@ -932,7 +932,7 @@ class _SearchCarsScreenState extends State<SearchCarsScreen> {
                                                 _buildDetailRowDialog(
                                                   title: 'Total Price',
                                                   value:
-                                                      '\\${totalPrice.toStringAsFixed(2)}',
+                                                      '\$${totalPrice.toStringAsFixed(2)}',
                                                   context: dialogContext,
                                                   icon: Icons.attach_money,
                                                 ),
